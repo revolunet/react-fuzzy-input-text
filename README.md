@@ -9,6 +9,8 @@ A simple search widget, that autocomplete your text inputs.
 [Demo](http://revolunet.github.io/react-fuzzy-input-text)
 
 ```js
+import FuzzyInput from 'react-fuzzy-input-text'
+
 const products = [
   "iPhone 4",
   "iPhone 5",
@@ -29,8 +31,9 @@ const products = [
   "Nexus 4",
   "Google pixel"
 ]
+
 return (
-  <AutoComplete
+  <FuzzyInput
     placeholder="Search product"
     items={ products }
     onChange={ item => alert(item) }
