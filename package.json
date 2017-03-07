@@ -31,7 +31,7 @@
   "author": "",
   "homepage": "",
   "license": "MIT",
-  "repository": "",
+  "repository": "https://github.com/revolunet/react-fuzzy-input-text.git",
   "keywords": [
     "react-component"
   ]
