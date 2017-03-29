@@ -1,4 +1,4 @@
-function match(country, query, startsWith) {
+export function match(item, query, startsWith) {
   // naive text search
   if (!query) {
     return true;
@@ -7,10 +7,10 @@ function match(country, query, startsWith) {
   if (!startsWith) {
     re = new RegExp(`^[^${query.charAt(0)}].*${query}.*`, "i");
   }
-  return country.match(re);
+  return !!item.match(re);
 }
 
-function filterItems(items, query) {
+export function filterItems(items, query) {
   if (!query) {
     return [];
   }
