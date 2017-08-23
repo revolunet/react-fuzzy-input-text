@@ -8,6 +8,29 @@ const textStyle = {
   fontFamily: "Roboto, Verdana, Arial"
 };
 
+// class FuseResults extends React.Component {
+//   componentDidMount() {
+//     this.fuse = new Fuse(this.props.items, this.props.fuse)
+//   }
+//   render() {
+//     const results = this.fuse.search(this.props.query)
+//     this.props.children(results)
+//   }
+// }
+// FuseResults.propTypes = {
+//   items: React.PropTypes.array,
+//   fuse: React.PropTypes.object
+// }
+// FuseResults.defaultProps = {
+//   items: [],
+//   fuse: {}
+// }
+// <FuseResults>
+// {results => {
+//   console.log('results', results)
+// }}
+// </FuseResults>
+
 class FuzzyInput extends React.Component {
   state = {
     query: "",
@@ -71,7 +94,7 @@ class FuzzyInput extends React.Component {
     if (query.length === 1) {
       query = query.toUpperCase();
     }
-    const isPerfectMatch = result && result.length === query.length;
+    const isPerfectMatch = result && result.toLowerCase() === query.toLowerCase();
     const inputStyle = {
       color: (result && !isPerfectMatch && "white") || "black",
       ...textStyle
