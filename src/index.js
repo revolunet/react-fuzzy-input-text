@@ -8,40 +8,17 @@ const textStyle = {
   fontFamily: "Roboto, Verdana, Arial"
 };
 
-// class FuseResults extends React.Component {
-//   componentDidMount() {
-//     this.fuse = new Fuse(this.props.items, this.props.fuse)
-//   }
-//   render() {
-//     const results = this.fuse.search(this.props.query)
-//     this.props.children(results)
-//   }
-// }
-// FuseResults.propTypes = {
-//   items: React.PropTypes.array,
-//   fuse: React.PropTypes.object
-// }
-// FuseResults.defaultProps = {
-//   items: [],
-//   fuse: {}
-// }
-// <FuseResults>
-// {results => {
-//   console.log('results', results)
-// }}
-// </FuseResults>
-
 class FuzzyInput extends React.Component {
   state = {
     query: "",
     resultIndex: 0
   };
-  onInput(e) {
+  onInput = (e) => {
     this.setState({
       query: e.target.value
     });
   }
-  onKeyDown(e) {
+  onKeyDown = (e) => {
     if ((this.state.query && e.keyCode === 9) || e.keyCode === 13) {
       e.preventDefault();
       e.stopPropagation();
@@ -95,28 +72,27 @@ class FuzzyInput extends React.Component {
       query = query.toUpperCase();
     }
     const isPerfectMatch = result && result.toLowerCase() === query.toLowerCase();
+    const divStyle = {
+      position: "relative"
+    };
     const inputStyle = {
       color: (result && !isPerfectMatch && "white") || "black",
       ...textStyle
     };
-    const divStyle = {
-      position: "relative"
-    };
-
-    return (
-      <div style={divStyle}>
-        <input
-          placeholder={this.props.placeholder}
-          onKeyDown={this.onKeyDown.bind(this)}
-          type="text"
-          style={inputStyle}
-          value={query}
-          onChange={this.onInput.bind(this)}
-        />
-        {!isPerfectMatch &&
-          <HighLight text={result} query={query} style={textStyle} />}
-      </div>
-    );
+     return (
+       <div style={divStyle}>
+         <input
+           placeholder={this.props.placeholder}
+           onKeyDown={this.onKeyDown.bind(this)}
+           type="text"
+           style={inputStyle}
+           value={query}
+           onChange={this.onInput.bind(this)}
+         />
+         {!isPerfectMatch &&
+           <HighLight text={result} query={query} style={textStyle} />}
+       </div>
+     );
   }
 }
 

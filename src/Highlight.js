@@ -8,7 +8,6 @@ const HighLight = ({ text, query, style }) => {
   if (!text) {
     return null
   }
-
   const placeholderStyle = {
     pointerEvents: "none",
     position: "relative",
