@@ -13,6 +13,7 @@ A simple [fuse.js](http://fusejs.io) based autocomplete widget.
 
 [Demo](http://revolunet.github.io/react-fuzzy-input-text)
 
+## Usage
 
 ```js
 import FuzzyInput from 'react-fuzzy-input-text'
