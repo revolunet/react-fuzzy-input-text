@@ -57,12 +57,12 @@ class FuzzyInput extends React.Component {
     }
   }
   getResults() {
-    return filterItems(this.props.items, this.state.query) || [];
+    return filterItems(this.props.items, this.state.query, this.props.fuseOptions) || [];
   }
   getResult(state) {
     const results = this.getResults();
     if (results.length && this.state.resultIndex < results.length) {
-      return results[this.state.resultIndex];
+      return this.props.items[results[this.state.resultIndex]];
     }
   }
   render() {

@@ -2,40 +2,33 @@
 
 [![npm package][npm-badge]][npm]
 
-A simple search widget, that autocomplete your text inputs.
+A simple [fuse.js](http://fusejs.io) based autocomplete widget.
 
 ![demo](./demo.gif)
 
+## Features
+
+ - use the awesome [fuse.js](http://fusejs.io) fuzzy-search library
+ - up/down keys navigation
+
 [Demo](http://revolunet.github.io/react-fuzzy-input-text)
+
 
 ```js
 import FuzzyInput from 'react-fuzzy-input-text'
 
-const products = [
-  "iPhone 4",
-  "iPhone 5",
-  "iPhone 6",
-  "iPhone 7",
-  "iPad 1",
-  "iPad 2",
-  "iPad 3",
-  "iPad 4",
-  "iPad Air",
-  "iPad Pro",
-  "Motorola G",
-  "Motorola G 2",
-  "Motorola X",
-  "Nexus 1",
-  "Nexus 2",
-  "Nexus 3",
-  "Nexus 4",
-  "Google pixel"
-]
+const cities = require('./cities.json')
+
+// optional fuse.js options
+const fuseOptions = {
+  threshold: 0.5
+}
 
 return (
   <FuzzyInput
-    placeholder="Search product"
-    items={ products }
+    placeholder="Search city"
+    items={ cities.map(c => c.name) }
+    fuseOptions={ fuseOptions }
     onChange={ item => alert(item) }
   />
 )

@@ -1,27 +1,23 @@
-export function match(item, query, startsWith) {
-  // naive text search
-  if (!query) {
-    return true;
-  }
-  let re = new RegExp(`^${query}.*`, "i");
-  if (!startsWith) {
-    re = new RegExp(`^[^${query.charAt(0)}].*${query}.*`, "i");
-  }
-  return !!item.match(re);
+import Fuse from "fuse.js"
+import memoized from "fast-memoize"
+
+const DEFAULT_FUSE_OPTIONS = {
+  threshold: 0.6
 }
 
-export function filterItems(items, query) {
+const getInstance = memoized((items, fuseOptions) => {
+  const options = Object.assign({}, DEFAULT_FUSE_OPTIONS, fuseOptions)
+  return new Fuse(items, options);
+})
+
+export function filterItems(items, query, fuseOptions={}) {
+  const options = Object.assign({}, DEFAULT_FUSE_OPTIONS, fuseOptions)
+  const fuse = getInstance(items, options);
   if (!query) {
     return [];
   }
-  // match at beginning
-  const results1 = items.filter(item => match(item, query, true));
-  results1.sort();
-  // match elsewhere
-  const results2 = items.filter(item => match(item, query, false));
-  results2.sort();
-  // return combined results
-  return results1.concat(results2);
+  const results = fuse.search(query)
+  return results
 }
 
 export default filterItems;
